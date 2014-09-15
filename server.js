@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 
 app.use(methodOverride());
 //app.use(express.static(path.join(application_root, "client/dist/")));
-app.use(errorHandler({dumpExceptions:true, showStack:true}));
+app.use(errorHandler({dumpExceptions:true, showStack:false}));
 
 app.set('port', (process.env.PORT || 5000));
 console.log('port: '+app.get('port'));
@@ -48,13 +48,13 @@ app.get('/', function (req, res){
 
 app.get('/getallusers', function(req, res, next){
 	//required for crossdomain
-	//res.header("Access-Control-Allow-Origin", "*");
-	//res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
-	//res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
 	
 
 	db.things.find('', function(err, users){
-		if(err)	res.send(""+err);
+		if(err)	res.send(":::"+err);
 		//if(err)	res.send(process.env);
 		else if(!users)	res.end("No users found.");
 		else{
