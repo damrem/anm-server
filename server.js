@@ -28,8 +28,11 @@ app.get('/', function (req, res){
 */
 app.all("*", function(req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
 	res.header("Access-Control-Allow-Methods", "GET, POST");
+
+	console.log("Request: "+req);
+
 	next();
 });
 
@@ -37,7 +40,7 @@ app.get('/api', function (req, res){
 	res.send('Our sample API is up...');
 });
 
-app.get('/getallusers', function(req, res){
+app.get('/getallusers', function(req, res, next){
 	//required for crossdomain
 	//res.header("Access-Control-Allow-Origin", "*");
 	//res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -59,9 +62,11 @@ app.get('/getallusers', function(req, res){
 			res.end(str);
 		}
 	});
+
+	next();
 });
 
-app.post('/insertuser', function(req, res){
+app.post('/insertuser', function(req, res, next){
 	console.log("POST: ");
 	//res.header("Access-Control-Allow-Origin", "http://localhost:"+app.get('port'));
 	//res.header("Access-Control-Allow-Methods", "GET, POST");
@@ -83,11 +88,7 @@ app.post('/insertuser', function(req, res){
 			}
 		}
 	);
-
-});
-
-app.get('/getuser', function(req, res){
-	res.send("getuser");
+	next();
 });
 
 app.listen(app.get('port'), function() {
