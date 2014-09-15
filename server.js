@@ -12,8 +12,22 @@ console.log("dbUrl=" + dbUrl);
 var collections=["things"];
 var db=require("mongojs").connect(dbUrl, collections);
 
+app.use(function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+
+	if(req.method == 'OPTIONS'){
+		res.send(200);
+	}
+	else{
+		next();
+	}
+});
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+
 app.use(methodOverride());
 //app.use(express.static(path.join(application_root, "client/dist/")));
 app.use(errorHandler({dumpExceptions:true, showStack:true}));
@@ -26,15 +40,7 @@ app.get('/', function (req, res){
 	res.render('client/');
 });
 */
-app.all("*", function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-	res.header("Access-Control-Allow-Methods", "GET, POST");
 
-	console.log("Header: "+req.header);
-
-	next();
-});
 
 app.get('/api', function (req, res){
 	res.send('Our sample API is up...');
