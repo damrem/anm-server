@@ -15,7 +15,7 @@ var db=require("mongojs").connect(dbUrl, collections);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(methodOverride());
-app.use(express.static(path.join(application_root, "client/dist/")));
+//app.use(express.static(path.join(application_root, "client/dist/")));
 app.use(errorHandler({dumpExceptions:true, showStack:true}));
 
 app.set('port', (process.env.PORT || 5000));
@@ -26,13 +26,20 @@ app.get('/', function (req, res){
 	res.render('client/');
 });
 */
+app.all("*", function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	next();
+});
+
 app.get('/api', function (req, res){
 	res.send('Our sample API is up...');
 });
 
 app.get('/getallusers', function(req, res){
 	//required for crossdomain
-	res.header("Access-Control-Allow-Origin", "http://localhost:"+app.get('port'));
+	//res.header("Access-Control-Allow-Origin", "*");
+	//res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.header("Access-Control-Allow-Methods", "GET, POST");
 
 	db.things.find('', function(err, users){
@@ -55,7 +62,7 @@ app.get('/getallusers', function(req, res){
 
 app.post('/insertuser', function(req, res){
 	console.log("POST: ");
-	res.header("Access-Control-Allow-Origin", "http://localhost:"+app.get('port'));
+	//res.header("Access-Control-Allow-Origin", "http://localhost:"+app.get('port'));
 	res.header("Access-Control-Allow-Methods", "GET, POST");
 
 	console.log(req.body);
