@@ -31,7 +31,7 @@ app.all("*", function(req, res, next){
 	res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
 	res.header("Access-Control-Allow-Methods", "GET, POST");
 
-	console.log("Request: "+req);
+	console.log("Header: "+req.header);
 
 	next();
 });
