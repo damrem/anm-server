@@ -42,14 +42,15 @@ app.get('/', function (req, res){
 */
 
 
-app.get('/api', function (req, res){
+app.get('/', function (req, res){
 	res.send('Our sample API is up...');
 });
 
 app.get('/getallusers', function(req, res, next){
 	//required for crossdomain
-	//res.header("Access-Control-Allow-Origin", "*");
-	//res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
 	
 
 	db.things.find('', function(err, users){
@@ -74,8 +75,9 @@ app.get('/getallusers', function(req, res, next){
 
 app.post('/insertuser', function(req, res, next){
 	console.log("POST: ");
-	//res.header("Access-Control-Allow-Origin", "http://localhost:"+app.get('port'));
-	//res.header("Access-Control-Allow-Methods", "GET, POST");
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
 
 	console.log(req.body);
 	console.log(req.body.mydata);
