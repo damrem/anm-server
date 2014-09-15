@@ -29,6 +29,7 @@ app.get('/', function (req, res){
 app.all("*", function(req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.header("Access-Control-Allow-Methods", "GET, POST");
 	next();
 });
 
@@ -40,7 +41,7 @@ app.get('/getallusers', function(req, res){
 	//required for crossdomain
 	//res.header("Access-Control-Allow-Origin", "*");
 	//res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	res.header("Access-Control-Allow-Methods", "GET, POST");
+	
 
 	db.things.find('', function(err, users){
 		if(err)	res.send(""+err);
@@ -63,7 +64,7 @@ app.get('/getallusers', function(req, res){
 app.post('/insertuser', function(req, res){
 	console.log("POST: ");
 	//res.header("Access-Control-Allow-Origin", "http://localhost:"+app.get('port'));
-	res.header("Access-Control-Allow-Methods", "GET, POST");
+	//res.header("Access-Control-Allow-Methods", "GET, POST");
 
 	console.log(req.body);
 	console.log(req.body.mydata);
