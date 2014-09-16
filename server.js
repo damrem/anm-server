@@ -46,7 +46,7 @@ app.get('/', function (req, res){
 	res.send('Our sample API is up...');
 });
 
-app.get('/getallusers', function(req, res, next){
+app.get('/getallusers', function(req, res){
 	//required for crossdomain
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
@@ -69,8 +69,6 @@ app.get('/getallusers', function(req, res, next){
 			res.end(str);
 		}
 	});
-
-	next();
 });
 
 app.post('/insertuser', function(req, res, next){
