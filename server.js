@@ -71,7 +71,7 @@ app.get('/getallusers', function(req, res){
 	});
 });
 
-app.post('/insertuser', function(req, res, next){
+app.post('/insertuser', function(req, res){
 	console.log("POST: ");
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
@@ -94,7 +94,6 @@ app.post('/insertuser', function(req, res, next){
 			}
 		}
 	);
-	next();
 });
 
 app.listen(app.get('port'), function() {
