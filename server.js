@@ -12,7 +12,7 @@ console.log("dbUrl=" + dbUrl);
 var collections=["things"];
 var db=require("mongojs").connect(dbUrl, collections);
 
-/*
+
 app.use(function(req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
@@ -25,7 +25,7 @@ app.use(function(req, res, next){
 		next();
 	}
 });
-*/
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
