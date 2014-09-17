@@ -11,7 +11,7 @@ var dbUrl=process.env.DATABASE_URL;
 console.log("dbUrl=" + dbUrl);
 var collections=["things"];
 var db=require("mongojs").connect(dbUrl, collections);
-/*
+
 app.use(function(req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
@@ -24,7 +24,7 @@ app.use(function(req, res, next){
 		next();
 	}
 });
-*/
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
@@ -43,10 +43,11 @@ app.get('/', function (req, res){
 app.get('/getallusers', function(req, res){
 
 	//required for crossdomain
+	/*
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
 	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-
+*/
 	db.things.find('', function(err, users){
 		if(err)	res.send(":::"+err);
 		//if(err)	res.send(process.env);
@@ -67,10 +68,11 @@ app.get('/getallusers', function(req, res){
 
 app.post('/insertuser', function(req, res){
 	console.log("POST: ");
+	/*
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization");
 	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-
+*/
 	console.log(req.body);
 	console.log(req.body.mydata);
 	var jsonData=JSON.parse(req.body.mydata);
