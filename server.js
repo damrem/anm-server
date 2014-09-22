@@ -52,11 +52,16 @@ app.get('/getallusers', function(req, res){
 			res.writeHead(200, {'Content-Type':'application/json'});
 			str='[';
 			users.forEach(function(user){
-				str=str+'{"name":"'+user.username+'"},'+'\n';
+				str = str + '{';
+				str = str + '"username":"'+user.username+'",';
+				str = str + '"email":"'+user.email+'",';
+				str = str + '"password":"'+user.password+'"';
+				str = str + '},';
 			});
 			str = str.trim();
 			str=str.substring(0, str.length-1);
 			str=str+']';
+			console.log(str);
 			res.end(str);
 		}
 	});
