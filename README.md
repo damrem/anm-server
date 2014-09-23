@@ -4,7 +4,7 @@ This is the server side of a personal experiment using [AngularJS](https://angul
 
 It is a REST developed with [Node.js](http://nodejs.org/) & [MongoDB](http://www.mongodb.org/) to discover the ecosystem, the tools & the best-practices around these techs.
 
-[Travis CI](https://travis-ci.org/damrem/anm-client) installs, builds and tests the project on each [Github](https://github.com/damrem/anm-client) push, then deploys it on [Divshot](https://divshot.com/) depending on the branch:
+[Travis CI](https://travis-ci.org/damrem/anm-server) installs, builds and tests the project on each [Github](https://github.com/damrem/anm-server) push, then deploys it on [Divshot](https://divshot.com/) depending on the branch:
 * any branch goes to [developement](http://anm-server-dev.herokuapp.com/)
 * `master`goes to [staging](http://anm-server-stg.herokuapp.com/)
 * nothing goes automatically to [production](http://anm-server.herokuapp.com/): I willingly want to keep this step manual.
