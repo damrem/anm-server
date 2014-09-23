@@ -70,8 +70,11 @@ app.get('/getallusers', function(req, res){
 app.post('/insertuser', function(req, res){
 	console.log("POST: ");
 	console.log(req.body);
-	console.log(req.body.user);
-	var jsonData=JSON.parse(req.body.user);
+	var prop;
+	for(prop in req.body);	//the client shall send a conventional 'user={...}' but we want to decouple the server from this convention and grab this prop name dynamically
+	var user = req.body[prop];
+	console.log(user);
+	var jsonData=JSON.parse(user);
 	db.things.save(
 		{email:jsonData.email, password:jsonData.password, username:jsonData.username}, 
 		function(err, saved){
