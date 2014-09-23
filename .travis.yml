@@ -14,6 +14,6 @@ deploy:
     api_key:
       secure: ceN9KFdTis7INewtebPuZGx9VZNy1adNul+3zCNaogfXgf+7mVvanhRFQqeoezvQ6GfReXJc8uwMCTZxDn9DhWWJTqczraJROcjYTXyrCb0crg4ScrjCwvyfwtIHTmTZ5d5PWxcxQZVxw5mhvohevAMaeD3NUzj80T+PU8nReNU=
     skip_cleanup: true
-    app: anm-server-stg
+    app: anm-server-dev
     on:
       all_branches: true
