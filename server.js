@@ -70,8 +70,8 @@ app.get('/getallusers', function(req, res){
 app.post('/insertuser', function(req, res){
 	console.log("POST: ");
 	console.log(req.body);
-	console.log(req.body.mydata);
-	var jsonData=JSON.parse(req.body.mydata);
+	console.log(req.body.user);
+	var jsonData=JSON.parse(req.body.user);
 	db.things.save(
 		{email:jsonData.email, password:jsonData.password, username:jsonData.username}, 
 		function(err, saved){
