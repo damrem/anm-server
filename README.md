@@ -1,5 +1,7 @@
 ![travis build](https://travis-ci.org/damrem/anm-server.svg)
 
+[![Stories in Ready](https://badge.waffle.io/damrem/anm-server.svg?label=ready&title=Ready)](http://waffle.io/damrem/anm-server) 
+
 This is the server side of a personal experiment using [AngularJS](https://angularjs.org/), [Node.js](http://nodejs.org/) & [MongoDB](http://www.mongodb.org/). It has no functional interest.
 
 It is a REST developed with [Node.js](http://nodejs.org/) & [MongoDB](http://www.mongodb.org/) to discover the ecosystem, the tools & the best-practices around these techs.
