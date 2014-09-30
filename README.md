@@ -1,10 +1,12 @@
 ![travis build](https://travis-ci.org/damrem/anm-server.svg)
 
+[![Stories in Ready](https://badge.waffle.io/damrem/anm-server.svg?label=ready&title=Ready)](http://waffle.io/damrem/anm-server) 
+
 This is the server side of a personal experiment using [AngularJS](https://angularjs.org/), [Node.js](http://nodejs.org/) & [MongoDB](http://www.mongodb.org/). It has no functional interest.
 
 It is a REST developed with [Node.js](http://nodejs.org/) & [MongoDB](http://www.mongodb.org/) to discover the ecosystem, the tools & the best-practices around these techs.
 
-[Travis CI](https://travis-ci.org/damrem/anm-server) installs, builds and tests the project on each [Github](https://github.com/damrem/anm-server) push, then deploys it on [Divshot](https://divshot.com/) depending on the branch:
+[Travis CI](https://travis-ci.org/damrem/anm-server) installs, builds and tests the project on each [Github](https://github.com/damrem/anm-server) push, then deploys it on [Heroku](https://www.heroku.com/) depending on the branch:
 * any branch goes to [developement](http://anm-server-dev.herokuapp.com/)
 * `master`goes to [staging](http://anm-server-stg.herokuapp.com/)
 * nothing goes automatically to [production](http://anm-server.herokuapp.com/): I willingly want to keep this step manual.
