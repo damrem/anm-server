@@ -44,9 +44,11 @@ app.get('/', function (req, res){
 
 app.get('/getallusers', function(req, res){
 
+	console.log('HANDLING "/getallusers" request.');
+
 	db.things.find('', function(err, users){
 		if(err){
-			console.log(err);
+			console.log('LOG: '+err);
 			res.send(":::"+err);
 		}
 		//if(err)	res.send(process.env);
