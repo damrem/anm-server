@@ -44,16 +44,20 @@ app.get('/', function (req, res){
 
 app.get('/getallusers', function(req, res){
 
-	console.log('HANDLING "/getallusers" request.');
+	console.log('HANDLING "/getallusers" request...');
 
 	db.things.find('', function(err, users){
 		if(err){
-			console.log('LOG: '+err);
+			console.log('ERROR: '+err);
 			res.send(":::"+err);
 		}
 		//if(err)	res.send(process.env);
-		else if(!users)	res.end("No users found.");
+		else if(!users){
+			console.log('No users found.');
+			res.end("No users found.");
+		}
 		else{
+			console.log('Building the response...');
 			res.writeHead(200, {'Content-Type':'application/json'});
 			str='[';
 			users.forEach(function(user){
@@ -66,10 +70,12 @@ app.get('/getallusers', function(req, res){
 			str = str.trim();
 			str=str.substring(0, str.length-1);
 			str=str+']';
-			console.log(str);
+			console.log('Built response: '+str);
 			res.end(str);
 		}
 	});
+
+	console.log('HANDLED "/getallusers" request!');
 });
 
 app.post('/insertuser', function(req, res){
