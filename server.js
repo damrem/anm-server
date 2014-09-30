@@ -7,14 +7,27 @@ var path=require("path");
 
 var app=express();
 
-var dbUrl=process.env.DATABASE_URL;
-console.log("dbUrl=" + dbUrl);
-var collections=["things"];
-var db=require("mongojs").connect(dbUrl, collections);
+//debugging purpose, clean it
+process.env.DATABASE_URL='mongodb://heroku:cIuEcbjH55u1NMOQkkVCr7mEe04H6yefm3VCxJfkA4L9hPgvKRTv_Q5HD5rNKKL6YXNErx6kpflFiEe07ssFow@lennon.mongohq.com:10057/app29883345';
 
-db.on('error', function(err){
-	console.log('DB ERROR: '+err);
+var dbUrl = process.env.DATABASE_URL;
+console.log("dbUrl=" + dbUrl);
+var collections = ["things"];
+
+var client = require('mongodb').MongoClient;
+var db/*, things*/;
+client.connect(dbUrl, function(err, connectedDb){
+	console.log('connect(err:'+err+',theDb:'+connectedDb);
+	db = connectedDb;
+	db.things = db.collection('things');
 });
+/*var mongojs=require("mongojs");
+var mongodb = require('mongodb');
+var db;
+mongodb.Db.connect(dbUrl, function(err, theDb){
+	console.log('connect(err:'+err+',theDb:'+theDb);
+	db = mongojs(theDb, collections);
+});*/
 
 //	crossdomain
 app.use(function(req, res, next){
@@ -50,34 +63,82 @@ app.get('/getallusers', function(req, res){
 
 	console.log('HANDLING "/getallusers" request...');
 
-	db.things.find('', function(err, users){
-		if(err){
-			console.log('ERROR: '+err);
-			res.send(":::"+err);
+	var curs;
+	var users = db.things.find({}, function(err, cursor){
+		console.log('ERROR: '+err);
+		console.log('cursor: '+cursor);
+		//for(var prop in obj)	console.log(prop+': '+obj[prop]);
+		curs=cursor;
+	});
+	console.log(curs===users);
+
+	res.writeHead(200, {'Content-Type':'application/json'});
+
+	console.log('Building the response...');
+	var str = '[';
+	curs.each(function(err, user){
+		console.log('each error: '+err);
+		console.log('each user: '+user);
+		if(user)
+		{
+			console.log(1, str);
+			str = str + '{';
+			console.log(2, str);
+			str = str + '"username":"'+user.username+'",';
+			console.log(3, str);
+			str = str + '"email":"'+user.email+'",';
+			console.log(4, str);
+			str = str + '"password":"'+user.password+'"';
+			console.log(5, str);
+			str = str + '},';
+			console.log(6, str);
 		}
-		//if(err)	res.send(process.env);
-		else if(!users){
-			console.log('No users found.');
-			res.end("No users found.");
-		}
-		else{
-			console.log('Building the response...');
-			res.writeHead(200, {'Content-Type':'application/json'});
-			str='[';
-			users.forEach(function(user){
-				str = str + '{';
-				str = str + '"username":"'+user.username+'",';
-				str = str + '"email":"'+user.email+'",';
-				str = str + '"password":"'+user.password+'"';
-				str = str + '},';
-			});
+		else	//is a null user the sign that we've just handled the last element?
+		{
+			console.log(7, str);
 			str = str.trim();
-			str=str.substring(0, str.length-1);
-			str=str+']';
+			console.log(8, str);
+			str = str.substring(0, str.length-1);
+			console.log(9, str);
+			str = str + ']';
+			console.log(10, str);
 			console.log('Built response: '+str);
 			res.end(str);
 		}
 	});
+	
+	/*
+	if(err){
+		console.log('ERROR: '+err);
+		res.send(":::"+err);
+	}
+	*/
+	//if(err)	res.send(process.env);
+	/*
+	else if(!users){
+		console.log('No users found.');
+		res.end("No users found.");
+	}
+	*/
+	/*
+	else{
+		console.log('Building the response...');
+		res.writeHead(200, {'Content-Type':'application/json'});
+		str='[';
+		users.each(function(err, user){
+			str = str + '{';
+			str = str + '"username":"'+user.username+'",';
+			str = str + '"email":"'+user.email+'",';
+			str = str + '"password":"'+user.password+'"';
+			str = str + '},';
+		});
+		str = str.trim();
+		str=str.substring(0, str.length-1);
+		str=str+']';
+		console.log('Built response: '+str);
+		res.end(str);
+	}
+	*/
 
 	console.log('HANDLED "/getallusers" request!');
 });
