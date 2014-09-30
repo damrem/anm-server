@@ -8,7 +8,7 @@ var path=require("path");
 var app=express();
 
 //debugging purpose, clean it
-process.env.DATABASE_URL='mongodb://heroku:cIuEcbjH55u1NMOQkkVCr7mEe04H6yefm3VCxJfkA4L9hPgvKRTv_Q5HD5rNKKL6YXNErx6kpflFiEe07ssFow@lennon.mongohq.com:10057/app29883345';
+//process.env.DATABASE_URL='mongodb://heroku:cIuEcbjH55u1NMOQkkVCr7mEe04H6yefm3VCxJfkA4L9hPgvKRTv_Q5HD5rNKKL6YXNErx6kpflFiEe07ssFow@lennon.mongohq.com:10057/app29883345';
 
 var dbUrl = process.env.DATABASE_URL;
 console.log("dbUrl=" + dbUrl);
