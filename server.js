@@ -45,7 +45,10 @@ app.get('/', function (req, res){
 app.get('/getallusers', function(req, res){
 
 	db.things.find('', function(err, users){
-		if(err)	res.send(":::"+err);
+		if(err){
+			console.log(err);
+			res.send(":::"+err);
+		}
 		//if(err)	res.send(process.env);
 		else if(!users)	res.end("No users found.");
 		else{
