@@ -39,7 +39,7 @@ app.set('view engine', 'html');
 
 
 app.get('/', function (req, res){
-	res.send('Our sample API is up...');
+	res.send('API is up. More info on <a href="https://github.com/damrem/anm-server">Github</a>.');
 });
 
 app.get('/getallusers', function(req, res){
