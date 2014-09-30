@@ -12,6 +12,10 @@ console.log("dbUrl=" + dbUrl);
 var collections=["things"];
 var db=require("mongojs").connect(dbUrl, collections);
 
+db.on('error', function(err){
+	console.log('DB ERROR: '+err);
+});
+
 //	crossdomain
 app.use(function(req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
